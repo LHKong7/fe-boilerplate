@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intersection Observer API</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #container {
+            width: 100vw;
+            height: 3000px;
+        }
+
+        #rootEl {
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            color: #fff;
+        }
+
+        #targetEl {
+            margin-top: 1500px;
+            width: 300px;
+            height: 300px;
+            background-color: aquamarine;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="rootEl">RootElement</div>
+        <div id="targetEl">targetElement</div>
+        <div class="image-container">
+            <img id="myImg" />
+        </div>
+    </div>
+    <script>
+        function loadImage(src) {
+            let imageURL = src || "https://img2.baidu.com/it/u=1730332330,1046168163&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=492";
+            let imageDescription = "world";
+
+            // downloadedImg = new Image();
+            const imgEl = document.querySelector('#myImg');
+            if (!imgEl.src) {
+                imgEl.crossOrigin = "Anonymous";
+                imgEl.addEventListener("load", function() {
+                    console.log("Image Load event triggered")
+                }, false);
+                imgEl.alt = imageDescription;
+                imgEl.src = imageURL;
+            }
+            return;
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 1.0
+            }
+
+            let observer = new IntersectionObserver(function(el) {
+                console.log("hello observer", el);
+                if (el[0].isIntersecting) {
+                    loadImage();
+                }
+            }, options);
+
+            let target = document.querySelector('#targetEl');
+            observer.observe(target);
+        });
+    </script>
+</body>
+</html>
