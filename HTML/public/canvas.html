@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Learning</title>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+    <script>
+        document.onload((e) => {
+            const myCanvas = document.getElementById("myCanvas");
+            let propCounter = 0;
+            for (let prop of myCanvas) {
+                propCounter++;
+            }
+
+            console.log("number of property in Canvas: ", propCounter);
+        })
+    </script>
+</body>
+</html>
